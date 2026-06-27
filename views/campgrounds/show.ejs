@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= campground.title %></title>
+</head>
+<body>
+    <h1><%= campground.title %></h1>
+    <h2>Location: <%= campground.location %></h2>
+    <p><%= campground.description %></p>
+    
+    <!-- Link to the Edit Form -->
+    <a href="/campgrounds/<%= campground._id %>/edit">Edit this Campground</a>
+
+    <!-- Delete Button (Must be a form to send a DELETE request!) -->
+    <form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+        <button>Delete</button>
+    </form>
+    
+    <a href="/campgrounds">Back to All Campgrounds</a>
+    
+    <hr>
+<h2>Leave a Review</h2>
+<!-- Form paths match our POST route layout -->
+<form action="/campgrounds/<%= campground._id %>/reviews" method="POST" style="margin-bottom: 30px;">
+    <div>
+        <label for="rating">Rating (1-5):</label>
+        <input type="range" min="1" max="5" name="review[rating]" id="rating">
+    </div>
+    <div>
+        <label for="body">Review Text:</label>
+        <textarea name="review[body]" id="body" cols="30" rows="3" required></textarea>
+    </div>
+    <button type="submit">Submit Review</button>
+</form>
+
+<hr>
+<h2>All Reviews</h2>
+<% for(let review of campground.reviews) { %>
+    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+        <p><strong>Rating: <%= review.rating %> / 5</strong></p>
+        <p><%= review.body %></p>
+        
+        <!-- The Delete Button Form -->
+        <form action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+            <button style="background-color: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Delete</button>
+        </form>
+    </div>
+<% } %>
+
+</body>
+</html>
+

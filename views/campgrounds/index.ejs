@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Campgrounds</title>
+</head>
+<body>
+    <h1>All Campgrounds</h1>
+    
+    <ul>
+        <% for(let camp of campgrounds) { %>
+            <li>
+                <!-- We will make this link work in the next step! -->
+                <a href="/campgrounds/<%= camp._id %>"><%= camp.title %></a>
+            </li>
+        <% } %>
+    </ul>
+
+    <a href="/">Back to Home</a>
+</body>
+</html>
